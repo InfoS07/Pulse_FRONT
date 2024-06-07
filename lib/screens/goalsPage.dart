@@ -19,7 +19,7 @@ class GoalsPage extends StatelessWidget {
           _buildProgressCard(),
           const SizedBox(height: 20.0),
           const Text(
-            'Daily Quests',
+            'Quetes quotidiennes',
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.bold,
@@ -27,9 +27,9 @@ class GoalsPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10.0),
-          _buildDailyQuest('Complete your next 2 lessons', 2, 2, Icons.star, Colors.pink),
-          _buildDailyQuest('Spend 10 minutes learning', 10, 10, Icons.timer, Colors.blue),
-          _buildDailyQuest('Score 90% or higher in 4 lessons', 4, 4, Icons.check_circle, Colors.green),
+          _buildDailyQuest('Compléter encore 2 activités', 2, 2, Icons.star, Colors.pink),
+          _buildDailyQuest('Passer 10 Minutes a vous entrainer', 10, 10, Icons.timer, Colors.blue),
+          _buildDailyQuest('Atteignez plus de 90% de vos aptitudes sur un exercice', 4, 4, Icons.check_circle, Colors.green),
         ],
       ),
     );
@@ -44,12 +44,12 @@ class GoalsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             Text(
-              "Falstaff’s Ride",
+              "Badge du mois de Mai",
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 3, 126, 124)),
             ),
             SizedBox(height: 5.0),
             Text(
-              "4 DAYS",
+              "4 JOURS RESTANTS",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.grey),
             ),
           ],
@@ -77,7 +77,7 @@ class GoalsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Complete 30 quests',
+            'Compléter 30 quêtes',
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 10.0),

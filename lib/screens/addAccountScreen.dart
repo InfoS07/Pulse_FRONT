@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pulse_front/main.dart';
+import 'package:pulse_front/screens/connexionPage.dart';
+import 'package:pulse_front/screens/onboardingPage.dart';
+
 
 
 class AddAccountScreen extends StatelessWidget {
@@ -37,11 +41,14 @@ class AddAccountScreen extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                  backgroundColor: Color.fromARGB(255, 3, 126, 124),
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 ),
                 onPressed: () {
-                  // Handle login
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ConnexionScreen()),
+                  );
                 },
                 child: const Text(
                   'SE CONNECTER',
@@ -62,15 +69,18 @@ class AddAccountScreen extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,
-                  side: const BorderSide(color: Colors.green),
+                  side: const BorderSide(color: Color.fromARGB(255, 3, 126, 124)),
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 ),
                 onPressed: () {
-                  // Handle sign up
+                   Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+                  );
                 },
                 child: const Text(
                   'C\'EST PARTI !',
-                  style: TextStyle(color: Colors.green),
+                  style: TextStyle(color: Color.fromARGB(255, 3, 126, 124)),
                 ),
               ),
               const Spacer(),
