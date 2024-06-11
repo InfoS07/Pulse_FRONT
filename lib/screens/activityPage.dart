@@ -11,21 +11,40 @@ class _ActivityScreenState extends State<ActivityScreen> {
   List<Activity> activities = [
     Activity(date: DateTime(2024, 5, 27), type: 'Musculation', duration: Duration(minutes: 45)),
     Activity(date: DateTime(2024, 5, 26), type: 'Yoga', duration: Duration(minutes: 30)),
-    Activity(date: DateTime(2024, 5, 25), type: 'Cardio', duration: Duration(minutes: 50)),
+    Activity(date: DateTime(2024, 6, 25), type: 'Cardio', duration: Duration(minutes: 50)),
+        Activity(date: DateTime(2024, 5, 27), type: 'Musculation', duration: Duration(minutes: 45)),
+    Activity(date: DateTime(2024, 5, 26), type: 'Yoga', duration: Duration(minutes: 30)),
+    Activity(date: DateTime(2024, 6, 25), type: 'Cardio', duration: Duration(minutes: 50)),
+        Activity(date: DateTime(2024, 5, 27), type: 'Musculation', duration: Duration(minutes: 45)),
+    Activity(date: DateTime(2024, 5, 26), type: 'Yoga', duration: Duration(minutes: 30)),
+    Activity(date: DateTime(2024, 6, 25), type: 'Cardio', duration: Duration(minutes: 50)),
+        Activity(date: DateTime(2024, 5, 27), type: 'Musculation', duration: Duration(minutes: 45)),
+    Activity(date: DateTime(2024, 5, 26), type: 'Yoga', duration: Duration(minutes: 30)),
+    Activity(date: DateTime(2024, 6, 25), type: 'Cardio', duration: Duration(minutes: 50)),
+        Activity(date: DateTime(2024, 5, 27), type: 'Musculation', duration: Duration(minutes: 45)),
+    Activity(date: DateTime(2024, 5, 26), type: 'Yoga', duration: Duration(minutes: 30)),
+    Activity(date: DateTime(2024, 6, 25), type: 'Cardio', duration: Duration(minutes: 50)),
     // Add more activities here
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 37, 36, 36),
       appBar: AppBar(
-        title: Text('Activité'),
+        backgroundColor: const Color.fromARGB(255, 37, 36, 36),
+        title: const Text('Activité', style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.white)),
+        automaticallyImplyLeading: false, // Retirer la flèche de retour
+
       ),
-      body: Column(
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
         children: [
           _buildFilterBar(),
+          const SizedBox(height: 20.0),
           _buildSummary(),
-          Expanded(child: _buildActivityList()),
+          const SizedBox(height: 20.0),
+          _buildActivityList(),
         ],
       ),
     );
@@ -51,6 +70,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
         });
       },
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 4.0),
         padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         decoration: BoxDecoration(
           color: selectedFilter == filter ? Colors.blue : Colors.grey,
@@ -67,24 +87,38 @@ class _ActivityScreenState extends State<ActivityScreen> {
   Widget _buildSummary() {
     final filteredActivities = _getFilteredActivities();
     final totalDuration = filteredActivities.fold(Duration(), (sum, item) => sum + item.duration);
-    final avgDuration = totalDuration.inMinutes ~/ filteredActivities.length;
-   
-
-    return Padding(
+    final avgDuration = totalDuration.inMinutes ~/ (filteredActivities.length == 0 ? 1 : filteredActivities.length);
+    
+    return Container(
       padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 45, 45, 45),
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Total: ${filteredActivities.length} activités',
-            style: TextStyle(fontSize: 18.0),
+            style: TextStyle(fontSize: 18.0, color: Colors.white),
           ),
+          SizedBox(height: 8.0),
           Text(
             'Durée totale: ${totalDuration.inMinutes} minutes',
-            style: TextStyle(fontSize: 18.0),
+            style: TextStyle(fontSize: 18.0, color: Colors.white),
           ),
+          SizedBox(height: 8.0),
           Text(
             'Durée moyenne: ${avgDuration} minutes',
-            style: TextStyle(fontSize: 18.0),
+            style: TextStyle(fontSize: 18.0, color: Colors.white),
           ),
         ],
       ),
@@ -95,22 +129,26 @@ class _ActivityScreenState extends State<ActivityScreen> {
     final filteredActivities = _getFilteredActivities();
 
     return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: filteredActivities.length,
       itemBuilder: (context, index) {
         final activity = filteredActivities[index];
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ActivityDetailScreen(activity: activity),
-              ),
-            );
-          },
+        return Card(
+          color: const Color.fromARGB(255, 45, 45, 45),
           child: ListTile(
-            title: Text(activity.type),
-            subtitle: Text('Durée: ${activity.duration.inMinutes} minutes'),
-            trailing: Text('${activity.date.day}/${activity.date.month}/${activity.date.year}'),
+            contentPadding: const EdgeInsets.all(16.0),
+            title: Text(activity.type, style: TextStyle(fontSize: 18.0, color: Colors.white)),
+            subtitle: Text('Durée: ${activity.duration.inMinutes} minutes', style: TextStyle(color: Colors.white)),
+            trailing: Text('${activity.date.day}/${activity.date.month}/${activity.date.year}', style: TextStyle(color: Colors.white)),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ActivityDetailScreen(activity: activity),
+                ),
+              );
+            },
           ),
         );
       },
@@ -165,8 +203,10 @@ class ActivityDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 37, 36, 36),
       appBar: AppBar(
-        title: Text('Détails de l\'activité'),
+        backgroundColor: const Color.fromARGB(255, 37, 36, 36),
+        title: Text('Détails de l\'activité', style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -175,12 +215,12 @@ class ActivityDetailScreen extends StatelessWidget {
           children: [
             Text(
               activity.type,
-              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             SizedBox(height: 16.0),
-            Text('Date: ${activity.date.day}/${activity.date.month}/${activity.date.year}'),
+            Text('Date: ${activity.date.day}/${activity.date.month}/${activity.date.year}', style: TextStyle(color: Colors.white)),
             SizedBox(height: 8.0),
-            Text('Durée: ${activity.duration.inMinutes} minutes'),
+            Text('Durée: ${activity.duration.inMinutes} minutes', style: TextStyle(color: Colors.white)),
           ],
         ),
       ),

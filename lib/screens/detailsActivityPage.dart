@@ -34,7 +34,7 @@ class _DetailsActivityScreenState extends State<DetailsActivityScreen> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 37, 36, 36),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -103,16 +103,9 @@ class _DetailsActivityScreenState extends State<DetailsActivityScreen> {
                   children: [
                     ElevatedButton(
                       onPressed: () {},
-                      child: Text('Start On Hit'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 3, 126, 124),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
                       child: Text('Start Now'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 3, 126, 124),
+                        backgroundColor: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
                   ],
