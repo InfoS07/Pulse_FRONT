@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>  HomePage()),
+      MaterialPageRoute(builder: (context) => HomePage()),
     );
   }
 
@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(flex: 2),
+              const Spacer(flex: 1),
               const Icon(Icons.emoji_emotions, size: 100, color: Color.fromARGB(255, 3, 126, 124)),
               const SizedBox(height: 20),
               const Text(
@@ -94,9 +94,13 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
               // Display the accounts
               Expanded(
+                flex: 6,
                 child: ListView.builder(
-                  itemCount: accounts.length,
+                  itemCount: accounts.length + 1,
                   itemBuilder: (context, index) {
+                    if (index == accounts.length) {
+                      return const AddAccountButton();
+                    }
                     final account = accounts[index];
                     return AccountTile(
                       name: account['email']!,
@@ -106,9 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 10),
-              const AddAccountButton(),
-              const Spacer(flex: 3),
+              const Spacer(flex: 1),
               TextButton(
                 onPressed: _navigateToManageAccounts,
                 child: const Text(
